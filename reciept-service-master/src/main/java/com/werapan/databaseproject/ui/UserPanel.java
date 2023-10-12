@@ -108,7 +108,6 @@ public class UserPanel extends javax.swing.JPanel {
         jLabel1.setText("ID:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("ID:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Login:");
