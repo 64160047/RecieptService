@@ -7,6 +7,7 @@ package com.werapan.databaseproject.service;
 import com.werapan.databaseproject.dao.ProductDao;
 import com.werapan.databaseproject.model.Product;
 import com.werapan.databaseproject.model.Product;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,11 @@ import java.util.List;
  */
 public class ProductService {
 
-
-    public List<Product> getProducts() {
-        ProductDao productDao = new ProductDao();
-        return productDao.getAll(" customer_id asc");
+    private ProductDao productDao = new ProductDao();
+    
+    public ArrayList<Product> getProductOrderByName() {
+        
+        return (ArrayList<Product>) productDao.getAll(" product_name ASC ");
     }
 
     public Product addNew(Product editedProduct) {

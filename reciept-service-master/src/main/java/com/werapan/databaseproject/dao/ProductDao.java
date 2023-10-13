@@ -64,7 +64,7 @@ public class ProductDao implements Dao<Product> {
     @Override
     public List<Product> getAll(String where, String order) {
         ArrayList<Product> list = new ArrayList();
-        String sql = "SELECT * FROM product where " + where + " ORDER BY" + order;
+        String sql = "SELECT * FROM product where " + where + " ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
