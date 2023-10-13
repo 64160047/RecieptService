@@ -6,8 +6,13 @@ package com.werapan.databaseproject.ui;
 
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -67,7 +72,7 @@ public class UserPanel extends javax.swing.JPanel {
             }
         });
         
-        enableForm(false);
+       
     }
 
     /**
@@ -80,148 +85,12 @@ public class UserPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnGender = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        edtName = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        rbtMale = new javax.swing.JRadioButton();
-        rbtFemale = new javax.swing.JRadioButton();
-        edtPassword = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        edtLogin = new javax.swing.JTextField();
-        cmbRole = new javax.swing.JComboBox<>();
-        btnSave = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUser = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-
-        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("ID:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Login:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Name:");
-
-        edtName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Password:");
-
-        btnGender.add(rbtMale);
-        rbtMale.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rbtMale.setSelected(true);
-        rbtMale.setText("Male");
-
-        btnGender.add(rbtFemale);
-        rbtFemale.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rbtFemale.setText("Female");
-
-        edtPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("Role:");
-
-        edtLogin.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        cmbRole.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
-
-        btnSave.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
-        btnClear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(edtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(edtPassword))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(edtName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(rbtMale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rbtFemale))))
-                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClear)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(edtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(rbtMale)
-                    .addComponent(rbtFemale)
-                    .addComponent(edtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
-                    .addComponent(btnClear))
-                .addContainerGap())
-        );
 
         tblUser.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblUser.setModel(new javax.swing.table.DefaultTableModel(
@@ -237,7 +106,7 @@ public class UserPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblUser);
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(241, 241, 253));
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAdd.setText("Add");
@@ -295,7 +164,6 @@ public class UserPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -303,9 +171,7 @@ public class UserPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -314,31 +180,29 @@ public class UserPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         editedUser = new User();
-        setObjectToForm();
-        enableForm(true);
+        openDialog();
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(editedUser.getId()<0){//Add New
-            setFormToObject();
-            enableForm(false);
-            userService.addNew(editedUser);
-            refreshTable();  
-        }else{
-            setFormToObject();
-            enableForm(false);
-            userService.update(editedUser);
-            refreshTable();
-        }
-
-    }//GEN-LAST:event_btnSaveActionPerformed
+    private void openDialog() {
+        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+        UserDialog userDialog = new UserDialog(frame, editedUser);
+        userDialog.setLocationRelativeTo(this);
+        userDialog.setVisible(true);
+        userDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshTable();
+            }
+            
+        });
+    }
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         int selectedIndex = tblUser.getSelectedRow();
         if(selectedIndex>=0){
             editedUser = list.get(selectedIndex);
-            setObjectToForm();
-            enableForm(true);
+            openDialog();
+            
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -355,86 +219,25 @@ public class UserPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        enableForm(false);
-        editedUser = null;
-    }//GEN-LAST:event_btnClearActionPerformed
-
     private void refreshTable() {
         list = userService.getUsers();
         tblUser.revalidate();
         tblUser.repaint();
     }
 
-    private void setFormToObject() {
-        editedUser.setLogin(edtLogin.getText());
-        editedUser.setName(edtName.getText());
-        editedUser.setPassword(new String(edtPassword.getPassword()));
-        if(rbtMale.isSelected()){
-            editedUser.setGender("M");
-        }else{
-            editedUser.setGender("F");
-        }
-        editedUser.setRole(cmbRole.getSelectedIndex());
-    }
-
-    private void setObjectToForm() {
-        edtLogin.setText(editedUser.getLogin());
-        edtName.setText(editedUser.getName());
-        edtPassword.setText(editedUser.getPassword());
-        if(editedUser.getGender().equals("M")){
-            rbtMale.setSelected(true);
-        }else{
-            rbtFemale.setSelected(true);
-        }
-        cmbRole.setSelectedIndex(editedUser.getRole());
-    }
-    
+   
     
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.ButtonGroup btnGender;
-    private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cmbRole;
-    private javax.swing.JTextField edtLogin;
-    private javax.swing.JTextField edtName;
-    private javax.swing.JPasswordField edtPassword;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rbtFemale;
-    private javax.swing.JRadioButton rbtMale;
     private javax.swing.JTable tblUser;
     // End of variables declaration//GEN-END:variables
 
-    private void enableForm(boolean status) {
-        if(status == false){
-            edtLogin.setText("");
-            edtName.setText("");
-            edtPassword.setText("");
-            rbtMale.setSelected(true);
-            cmbRole.setSelectedIndex(0);
-        }
-        edtLogin.setEnabled(status);
-        edtName.setEnabled(status);
-        edtPassword.setEnabled(status);
-        btnSave.setEnabled(status);
-        btnClear.setEnabled(status);
-        rbtMale.setEnabled(status);
-        rbtFemale.setEnabled(status);
-        cmbRole.setEnabled(status);
-        edtLogin.requestFocus();
-        
-    }
+    
 }
