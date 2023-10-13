@@ -7,9 +7,11 @@ package com.werapan.databaseproject.ui;
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -33,6 +35,7 @@ public class UserPanel extends javax.swing.JPanel {
         userService = new UserService();
         
         list = userService.getUsers();
+        tblUser.setRowHeight(100);
         tblUser.setModel(new AbstractTableModel() {
             String[] columnNames = {"ID", "Login", "Name", "Password", "Gender", "Role"};
             @Override
@@ -51,20 +54,41 @@ public class UserPanel extends javax.swing.JPanel {
             }
 
             @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                switch(columnIndex) {
+                    case 0 : 
+                        return ImageIcon.class;
+                    default:
+                        return String.class;
+                        
+                      
+                }
+            }
+            
+
+            @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
                 User user = list.get(rowIndex);
                 switch (columnIndex) {
                     case 0:
-                        return user.getId();
+                        ImageIcon icon = new ImageIcon("./user" + user.getId() + ".png");
+                        Image image = icon.getImage();
+                        int width = image.getWidth(null);
+                        int height = image.getHeight(null);
+                        Image newImage = image.getScaledInstance((int) (100*((float)width)/height), 100, Image.SCALE_SMOOTH);
+                        icon.setImage(newImage);
+                        return icon;
                     case 1:
-                        return user.getLogin();
+                        return user.getId();
                     case 2:
-                        return user.getName();
+                        return user.getLogin();
                     case 3:
-                        return user.getPassword();
+                        return user.getName();
                     case 4:
-                        return user.getGender();
+                        return user.getPassword();
                     case 5:
+                        return user.getGender();
+                    case 6:
                         return user.getRole();
                     default:
                         return "Unknown";
@@ -143,12 +167,12 @@ public class UserPanel extends javax.swing.JPanel {
                 .addComponent(btnEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(484, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnEdit)
@@ -163,8 +187,8 @@ public class UserPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,8 +197,7 @@ public class UserPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
