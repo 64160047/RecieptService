@@ -4,22 +4,31 @@
  */
 package com.werapan.databaseproject.component;
 
+import com.werapan.databaseproject.model.Product;
+import com.werapan.databaseproject.service.ProductService;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 /**
  *
  * @author minnie
  */
 public class ProductListPanel extends javax.swing.JPanel {
+    private final ProductService productService;
+     private final ArrayList<Product> products;
 
     /**
      * Creates new form ProductListPanel
      */
     public ProductListPanel() {
         initComponents();
-        int productSize = 10;
-        for(int i=0;i<productSize;i++) {
-            pnlProductList.add(new ProductItemPanel());
+        productService = new ProductService();
+        products = productService.getProductOrderByName();
+        
+        int productSize = products.size();
+        
+        for(Product p: products) {
+            pnlProductList.add(new ProductItemPanel(p));
             
         }
         pnlProductList.setLayout(new GridLayout((productSize/3)+((productSize%3 !=0)?1:0),3,0,0));
