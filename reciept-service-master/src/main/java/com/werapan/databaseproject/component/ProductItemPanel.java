@@ -6,6 +6,9 @@ package com.werapan.databaseproject.component;
 
 import com.werapan.databaseproject.model.Product;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,6 +18,7 @@ import javax.swing.ImageIcon;
 public class ProductItemPanel extends javax.swing.JPanel {
 
     private final Product product;
+    private ArrayList<BuyProductable> subscribers = new ArrayList<>();
 
     /**
      * Creates new form ProductItemPanel
@@ -31,6 +35,21 @@ public class ProductItemPanel extends javax.swing.JPanel {
         Image newImage = image.getScaledInstance((int) ((100.0 * width) / height), 100, Image.SCALE_SMOOTH);
         icon.setImage(newImage);
         lblImage.setIcon(icon);
+        lblImage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Clicked");
+                for(BuyProductable s: subscribers) {
+                    s.buy(product, Integer.parseInt(txtQty.getText()));
+                }
+                txtQty.setText("1");
+            }
+            
+        
+        });
+    }
+    public void addOnBuyProduct(BuyProductable subscriber) {
+        subscribers.add(subscriber);
     }
 
     /**
@@ -47,7 +66,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtQty = new javax.swing.JTextField();
 
         lblName.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -56,11 +75,21 @@ public class ProductItemPanel extends javax.swing.JPanel {
         lblImage.setBackground(new java.awt.Color(255, 204, 204));
 
         jButton1.setText("+");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("-");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("1");
+        txtQty.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtQty.setText("1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,7 +99,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -82,7 +111,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -110,13 +139,24 @@ public class ProductItemPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int newQty = Integer.parseInt(txtQty.getText())+1;
+        txtQty.setText(""+newQty);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int newQty = Integer.parseInt(txtQty.getText())-1;
+        if(newQty<1) return;
+        txtQty.setText(""+newQty);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblImage;
     private javax.swing.JLabel lblName;
+    private javax.swing.JTextField txtQty;
     // End of variables declaration//GEN-END:variables
 }
