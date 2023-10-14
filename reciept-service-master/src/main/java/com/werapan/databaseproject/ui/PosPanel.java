@@ -39,6 +39,7 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         initComponents();
         initProductTable();
         reciept = new Reciept();
+        lblUserName.setText(UserService.getCurrentUser().getName());
         reciept.setUser(UserService.getCurrentUser());
         tblRecieptDetail.setModel(new AbstractTableModel() {
             String[] headers = {"Name", "Price", "Qty", "Total"};
@@ -77,6 +78,31 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
                 }
             }
 
+            @Override
+            public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+                ArrayList<RecieptDetail> recieptDetails = reciept.getRecieptDetails();
+                RecieptDetail recieptDetail = recieptDetails.get(rowIndex);
+                if(columnIndex==2) { 
+                    int qty = Integer.parseInt((String) aValue);
+                    if(qty<1) return;
+                    recieptDetail.setqty(qty);
+                    reciept.calculateTotal();
+                    refreshReciept();
+                    
+                }
+                
+            }
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                switch(columnIndex) { 
+                    case 2:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        
         });
         productListPanel = new ProductListPanel();
         productListPanel.addOnBuyProduct(this);
@@ -197,16 +223,16 @@ public class PosPanel extends javax.swing.JPanel implements BuyProductable {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(925, Short.MAX_VALUE)
-                .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(755, Short.MAX_VALUE)
+                .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(37, 37, 37)
                 .addComponent(lblUserName)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         tblRecieptDetail.setFont(new java.awt.Font("TH Sarabun New", 0, 14)); // NOI18N
