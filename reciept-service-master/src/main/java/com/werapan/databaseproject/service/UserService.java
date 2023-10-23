@@ -34,15 +34,22 @@ public class UserService {
         return userDao.getAll(" user_login asc");
     }
 
-    public User addNew(User editedUser) {
+     public User addNew(User editedUser) throws Exception {
+        if(!editedUser.isValid()) {
+            throw new Exception("User is invalid!!!");
+        }
         UserDao userDao = new UserDao();
         return userDao.save(editedUser);
     }
 
-    public User update(User editedUser) {
+     public User update(User editedUser) throws Exception {
+        if(!editedUser.isValid()) {
+            throw new Exception("User is invalid!!!");
+        }
         UserDao userDao = new UserDao();
         return userDao.update(editedUser);
     }
+
 
     public int delete(User editedUser) {
         UserDao userDao = new UserDao();

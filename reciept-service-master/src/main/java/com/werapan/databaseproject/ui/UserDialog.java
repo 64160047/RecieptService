@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -128,6 +129,11 @@ public class UserDialog extends javax.swing.JDialog {
         rbtMale.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         rbtMale.setSelected(true);
         rbtMale.setText("Male");
+        rbtMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtMaleActionPerformed(evt);
+            }
+        });
 
         rbtFemale.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         rbtFemale.setText("Female");
@@ -263,21 +269,29 @@ public class UserDialog extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         User user;
-        if (editedUser.getId() < 0) {//Add New
-            setFormToObject();
-            user = userService.addNew(editedUser);
-
-        } else {
-            setFormToObject();
-            user = userService.update(editedUser);
-
+         try {
+            if (editedUser.getId() < 0) {
+                //Add New
+                setFormToObject();
+                user = userService.addNew(editedUser);
+            } else {
+                setFormToObject();
+                user = userService.update(editedUser);
+            }
+            saveImage(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserDialog.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            return ;
         }
-        saveImage(user);
-        this.dispose();
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void saveImage(User user) {
-        if(path == null || path.isEmpty()) return;
+         if (path == null || path.isEmpty()) {
+            return;
+        }
+
         try {
             BufferedImage image = ImageIO.read(new File(path));
             ImageIO.write(image, "png", new File("./user" + user.getId() + ".png"));
@@ -293,6 +307,10 @@ public class UserDialog extends javax.swing.JDialog {
     private void lblPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhotoMouseClicked
        chooseImage();
     }//GEN-LAST:event_lblPhotoMouseClicked
+
+    private void rbtMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtMaleActionPerformed
 
     private void setFormToObject() {
         editedUser.setLogin(edtLogin.getText());

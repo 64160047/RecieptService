@@ -117,4 +117,15 @@ public class User {
         }
         return user;
     }
+     public boolean isValid() {
+        // Business Rules
+        // Name >=3
+        // login >=3
+        //password >=8
+        return this.login.length() >= 3 && 
+                this.name.length() >= 3 &&
+                this.password.length() >= 8;
+    }
 }
+
+
