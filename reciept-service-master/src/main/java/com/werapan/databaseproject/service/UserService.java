@@ -17,7 +17,7 @@ public class UserService {
     public User login(String login, String password) {
         UserDao userDao = new UserDao();
         User user = userDao.getByLogin(login);
-        if(user != null && user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)){
             currentUser = user;
             return user;
         }
@@ -29,15 +29,16 @@ public class UserService {
     }
     
     
-    public List<User> getUsers(){
+     public List<User> getUsers() {
         UserDao userDao = new UserDao();
         return userDao.getAll(" user_login asc");
     }
 
-     public User addNew(User editedUser) throws Exception {
-        if(!editedUser.isValid()) {
-            throw new Exception("User is invalid!!!");
+      public User addNew(User editedUser) throws ValidateException {
+        if (!editedUser.isValid()) {
+            throw new ValidateException("User is invalid!!!");
         }
+
         UserDao userDao = new UserDao();
         return userDao.save(editedUser);
     }

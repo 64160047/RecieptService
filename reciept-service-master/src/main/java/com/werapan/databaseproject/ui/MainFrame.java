@@ -17,7 +17,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        scrPanel.setViewportView(new PosPanel());
+//        scrPanel.setViewportView(new PosPanel());
+         scrPanel.setViewportView(new UserPanel());
     }
 
     /**

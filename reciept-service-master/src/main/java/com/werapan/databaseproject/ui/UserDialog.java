@@ -6,6 +6,7 @@ package com.werapan.databaseproject.ui;
 
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
+import com.werapan.databaseproject.service.ValidateException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -279,10 +280,12 @@ public class UserDialog extends javax.swing.JDialog {
                 user = userService.update(editedUser);
             }
             saveImage(user);
-        } catch (Exception ex) {
+        }catch (ValidateException ex) {
             Logger.getLogger(UserDialog.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
             return ;
+        } catch (Exception ex) {
+            Logger.getLogger(UserDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
